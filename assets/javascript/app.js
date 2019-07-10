@@ -12,11 +12,12 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
   var database = firebase.database();
-
   var name;
   var destination;
   var firstTrain;
   var frequency = 0;
+
+$("#current-time").text(moment().format(" hh :  mm a , MMMM D YYYY"));
 
 $("#add-train").click(function(){
   let name = $("#train-name").val().trim();
@@ -37,18 +38,21 @@ database.ref().on("child_added", function(snapshot){
   let newRow = $("<tr>");
   let newName = $("<td>");
   newName.append(newTrain.name);
+  
   let newDestination = $("<td>");
   newDestination.append(newTrain.destination);
+  
   let newFirstTrain = $("<td>");
   newFirstTrain.append(newTrain.firstTrain);
+  
   let newFrequency = $("<td>");
   newFrequency.append(newTrain.frequency);
+  
   let newMinute = $("<td>");
   newMinute.append("-");
 
   newRow.append(newName, newDestination, newFrequency, newFirstTrain, newMinute);
   $("#add-train-row").append(newRow);
-  console.log("Blah")
 })
 })
 
